@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import ExpenseFilter from "./components/Expenses/ExpenseFilter";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
-  const expenses = [
+  
+  const defaultExpenses = [
     {
       id: "e1",
       title: "Toilet Paper",
@@ -24,13 +26,16 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+  const [expenses, setExpenses] = useState<IExpenseItemProps[]>(defaultExpenses);
 
   const addExpenseHandler = (expense:IExpenseItemProps) => {
     console.log('from App.js', expense);
+    setExpenses([...expenses,expense]);
   }
   return (
     <>
       <NewExpense onAddExpense = {addExpenseHandler} />
+     
       <Expenses expenses={expenses} />
     </>
   );
