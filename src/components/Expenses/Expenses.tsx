@@ -10,6 +10,7 @@ const Expenses = (props: IExpensesProps) => {
       {props.expenses.map((expense) => {
         return (
           <ExpensItem
+            key = {expense.id}
             id={expense.id}
             date={expense.date}
             title={expense.title}
