@@ -8,7 +8,6 @@ const NewExpense = (props:IExpenseProps) => {
         const expenseData = {
             ...enteredExpenseData
         };
-        console.log('from new expense',expenseData);
         props.onAddExpense(expenseData);
     }; 
   return (

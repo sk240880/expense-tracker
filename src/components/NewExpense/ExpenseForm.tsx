@@ -1,26 +1,14 @@
 import React, { useState } from "react";
-import { parse } from "url";
 
 import "./ExpenseForm.css";
 
-const ExpenseForm = (props:IUserExpenseFormProps) => {
+const ExpenseForm = (props: IUserExpenseFormProps) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
-
-  //   const [userInput, setUserInput] = useState<IUserFormInputProps>({
-  //     enteredTitle: "",
-  //     enteredAmount: "",
-  //     enteredDate: "",
-  //   });
+  const [showForm, setShowForm] = useState(false);
 
   const titleChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //setUserInput({ ...userInput, enteredTitle: event.target.value });
-
-    // setUserInput((prevState: IUserFormInputProps) => {
-    //   return { ...prevState, enteredTitle: event.target.value };
-    // });
-
     setEnteredTitle(event.target.value);
   };
 
@@ -43,12 +31,19 @@ const ExpenseForm = (props:IUserExpenseFormProps) => {
       date: new Date(enteredDate),
     };
     props.onSaveExpenseData(newExpense);
-   // console.log(newExpense);
+    // console.log(newExpense);
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
+    setShowForm(false);
   };
 
+  const cancelHandler = () => setShowForm(false);
+  const addExpensesHandler = () => setShowForm(true);
+
+  if (!showForm) {
+    return <button onClick={addExpensesHandler}>Add Expenses</button>;
+  }
   return (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
@@ -82,6 +77,7 @@ const ExpenseForm = (props:IUserExpenseFormProps) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button onClick={cancelHandler}>Cancel</button>
         <button type="submit">Add Expenses</button>
       </div>
     </form>

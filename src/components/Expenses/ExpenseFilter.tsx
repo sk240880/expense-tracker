@@ -11,6 +11,7 @@ const ExpenseFilter = (props:IExpenseFilterProps) => {
 //   }
 const yearChangedHandler = (event:React.ChangeEvent<HTMLSelectElement>) =>{
     //console.log(event.target.value);
+    event.preventDefault();
     setFilterYer(event.target.value);
     props.onYearChange(event.target.value);
 }
@@ -19,7 +20,6 @@ const yearChangedHandler = (event:React.ChangeEvent<HTMLSelectElement>) =>{
       <div className="expenses-filter__control">
         <label>Filter by year</label>
         <select value={props.selected} onChange={yearChangedHandler}>
-        <option value="">Select All</option> 
           Í<option value="2022">2022</option>
           <option value="2021">2021</option>
           <option value="2020">2020</option>
